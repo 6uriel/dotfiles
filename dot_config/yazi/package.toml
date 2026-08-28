@@ -1,0 +1,19 @@
+[[plugin.deps]]
+use = "ourongxing/fast-enter"
+rev = "9fe77d8"
+hash = "7ac02a3fa73cd734ddf4ac85af4c0507"
+
+[[plugin.deps]]
+use = "Jormala/relative-motions"
+rev = "d4f2003"
+hash = "e0017cae4c0772dd41b7e7c259a6e683"
+
+[[plugin.deps]]
+use = "AminurAlam/yazi-plugins:fchar"
+rev = "8c2ce96"
+hash = "9f2598542a3263b5a03d7fb832b407c1"
+
+[[flavor.deps]]
+use = "ficd0/ashen:ashen"
+rev = "2da901f"
+hash = "ba991622420e9e408b77f73c5815d066"

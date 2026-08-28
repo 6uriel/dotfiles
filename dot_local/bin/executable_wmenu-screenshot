@@ -1,0 +1,36 @@
+#!/bin/sh
+
+# Simple screenshot script using grim and slurp
+# Saves to ~/Pictures/screenshots/ with a timestamp
+
+mkdir -p "$HOME/Pictures/screenshots"
+
+# Select region (cancel = empty string)
+region=$(slurp 2>/dev/null)
+
+# If user cancelled or selection failed, exit silently
+if [ -z "$region" ]; then
+    exit 0
+fi
+
+# Generate unique filename
+filename="$(date +%Y-%m-%d_%H-%M-%S).png"
+fullpath="$HOME/Pictures/screenshots/$filename"
+
+# Take the screenshot
+if grim -g "$region" "$fullpath"; then
+    wl-copy < "$fullpath"
+    # Success: send a mako notification (plain, no button)
+    notify-send \
+        -h string:group:screenshot \
+        ":: Screenshot taken" \
+        "Saved as $filename"
+else
+    # Failure: send a critical error notification
+    notify-send \
+        -u critical \
+        -h string:group:screenshot \
+        "<< Screenshot failed" \
+        "Something went wrong while capturing."
+    exit 1
+fi

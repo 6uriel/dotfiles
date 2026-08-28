@@ -1,0 +1,43 @@
+(defcfg
+  ;; block-unmapped-keys yes
+  ;; process-unmapped-keys yes
+  log-layer-changes no
+  ;; concurrent-tap-hold yes
+)
+
+(defsrc
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt rmet rctl
+)
+
+(deflayer modified
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  esc  @aM  @sA  @dC  @fS  g    h    @jS  @kC  @lA  @;M  '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet @lNav           spc            bspc rmet rctl
+)
+
+(deflayer Nav 
+  _    _    _     _     _     _     _     _     _     _     _     _     _     _
+  _    S-[  S-]   S-9   S-0   S-2   S--   S-=   -     =     S-8   _     _     _
+  _    0    S-6   S-5   S-4   S-1   left  down  up    rght  S-;   _     _
+  _    [    ]     \     S-grv S-3   S-7   S-\   '     S-'   grv   _
+  _    _    _              _              _     _     _
+)
+
+(defalias
+  aM (tap-hold 000 200 a lmet)
+  ;M (tap-hold 000 200 ; rmet)
+  sA (tap-hold 000 200 s lalt)
+  lA (tap-hold 000 200 l lalt)
+  dC (tap-hold 000 200 d lctl)
+  kC (tap-hold 000 200 k lctl)
+  fS (tap-hold 000 200 f lsft)
+  jS (tap-hold 000 200 j lsft)
+  lNav(layer-toggle Nav)
+)
+

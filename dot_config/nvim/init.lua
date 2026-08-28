@@ -1,0 +1,6 @@
+require("options")
+require("lazynvim")
+require("keymaps")
+require("autocmd")
+require("commands")
+require("theme")

@@ -1,23 +1,15 @@
 #!/bin/sh
 
-# This script is a simple powermenu for wmenu
-# extended to include process killing.
-
-# Reusable wmenu function to keep fonts and colors consistent across sub-menus
 wmenu_prompt() {
     wmenu "$@" -i -f "PP Right Grotesk Mono 10" \
           -N "#000000" -n "#c1c1c1" -M "#79241f" \
           -m "#000000" -S "#79241f" -s "#000000"
 }
 
-# Suckless 'slock' behavior for Wayland
-# Pure black screen, dark blue on typing, dark red on fail
 lock_cmd="waylock -init-color 0x000000 -input-color 0x222222 -fail-color 0x79241f"
 
-# Logout of dwl by killing the compositor directly
 logout_cmd="killall dwl"
 
-# Main Menu
 choice=$(printf "Shutdown\nReboot\nSuspend\nLogout\nLock\nKill\nKillall" | wmenu_prompt "$@" -p 'Power Menu')
 
 case "$choice" in
@@ -28,7 +20,6 @@ case "$choice" in
         $logout_cmd 
         ;;
     Suspend) 
-        # Using systemctl. If you are on an init system without systemd (like Artix), use 'zzz' instead.
         systemctl suspend 
         ;;
     Reboot) 
@@ -38,21 +29,17 @@ case "$choice" in
         poweroff 
         ;;
     Kill)
-        # Get user processes, sort alphabetically, format without headers, and strip leading spaces
         selected=$(ps -u "$USER" -o pid,comm --sort=comm | tail -n +2 | awk '{$1=$1; print}' | wmenu_prompt "$@" -p 'Kill PID:' -l 15)
         
         if [ -n "$selected" ]; then
-            # Extract just the PID (the first column) and politely kill it
             pid=$(echo "$selected" | awk '{print $1}')
             kill "$pid"
         fi
         ;;
     Killall)
-        # Get user processes, strip headers, filter for unique names only
         selected=$(ps -u "$USER" -o comm | tail -n +2 | sort -u | wmenu_prompt "$@" -p 'Killall:' -l 15)
         
         if [ -n "$selected" ]; then
-            # Politely kill all instances of the selected process name
             killall "$selected"
         fi
         ;;

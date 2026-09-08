@@ -32,7 +32,7 @@ set -gx FZF_DEFAULT_OPTS " \
 zoxide init --cmd j fish | source
 
 # alias
-abbr --add yay paru
+alias yay=paru
 abbr --add ls "eza -a"
 abbr --add copy wl-copy
 abbr --add find fd
@@ -43,6 +43,8 @@ alias vi=nvim
 abbr --add cat bat
 abbr --add grep rg
 abbr --add aria aria2c
+
+abbr --add cmb "cmake -S . -B build && cmake --build build"
 
 abbr --add ta "tmux attach"
 abbr --add tl "tmux list-sessions"

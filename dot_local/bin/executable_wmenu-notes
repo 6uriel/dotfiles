@@ -1,26 +1,17 @@
 #!/bin/sh
 
-# Simple note-taking script using wmenu
-
 NOTES_DIR="$HOME/Documents/notes"
 mkdir -p "$NOTES_DIR"
 
-# Set your preferred terminal and editor here
 TERM_CMD="foot"
-EDITOR_CMD="nvim" # change to nano, vim, helix, etc. if you prefer
+EDITOR_CMD="nvim"
 
-# List existing notes and pipe them into wmenu
-# choice=$(ls -1 "$NOTES_DIR" 2>/dev/null | wmenu "$@" -p 'Note' -i -f "PP Right Grotesk Mono 10" -N "#000000" -n "#c1c1c1" -M "#79241f" -m "#000000" -S "#79241f" -s "#000000")
 choice=$(find "$NOTES_DIR" -type f \( -name '*.md' -o -name '*.typ' \) -printf '%P\n' 2>/dev/null | wmenu "$@" -l 10 -p 'Note' -i -f "PP Right Grotesk Mono 10" -N "#000000" -n "#c1c1c1" -M "#79241f" -m "#000000" -S "#79241f" -s "#000000")
 
-
-# Exit if you hit Escape or don't type anything
 if [ -z "$choice" ]; then
     exit 0
 fi
 
-# Determine the full file path
 FILE="$NOTES_DIR/$choice"
 
-# Launch your terminal with your editor to open/create the note
 $TERM_CMD $EDITOR_CMD "$FILE"

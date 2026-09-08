@@ -35,14 +35,19 @@ return {
   {
     "scalameta/nvim-metals",
     ft = { "scala", "sbt", "java" },
+    dependencies = { "nvim-lua/plenary.nvim" },
     opts = function()
       local metals_config = require("metals").bare_config()
+      metals_config.capabilities = require("blink.cmp").get_lsp_capabilities()
       metals_config.settings = {
+        serverVersion = "1.6.8",
         showImplicitArguments = true,
+        testUserInterface = "Test Explorer",
       }
       metals_config.init_options.statusBarProvider = "off"
-      metals_config.on_attach = function(client, bufnr)
-        -- your on_attach function
+      metals_config.on_attach = function()
+        require("lazy").load({ plugins = { "nvim-dap" } })
+        require("metals").setup_dap()
       end
 
       return metals_config

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://opencode.ai/v2/cli.json",
+  "theme": {
+    "name": "black-metal-venom",
+    "mode": "dark"
+  },
+  "keybinds": {
+    "leader": "ctrl+a"
+  },
+  "tabs": {
+    "mode": "off"
+  },
+  "diffs": {
+    "wrap": "word"
+  },
+  "session": {
+    "sidebar": "auto",
+    "scrollbar": false,
+    "thinking": "hide"
+  },
+  "animations": true
+}

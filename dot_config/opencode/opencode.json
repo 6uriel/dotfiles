@@ -1,0 +1,48 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "verda/kimi-k3-1-pro",
+  "providers": {
+    "verda": {
+      "name": "Verda",
+      "env": ["VERDA_INFERENCE_API_KEY"],
+      "package": "@opencode/ai/providers/openai-compatible",
+      "settings": {
+        "baseURL": "https://inference.verda.com/v1"
+      },
+      "models": {
+        "kimi-k3-1-pro": {
+          "name": "Kimi K3.1 Pro",
+          "capabilities": {
+            "tools": true,
+            "input": ["text", "image"],
+            "output": ["text"],
+            "reasoning": {
+              "supported": true,
+              "effort": ["low", "high", "max"]
+            }
+          },
+          "limit": {
+            "context": 1048576,
+            "output": 131072
+          }
+        },
+        "deepseek-4-1-flash-1017": {
+          "name": "DeepSeek V4.1 Flash",
+          "capabilities": {
+            "tools": true,
+            "input": ["text", "image"],
+            "output": ["text"],
+            "reasoning": {
+              "supported": true,
+              "effort": ["low", "high", "max"]
+            }
+          },
+          "limit": {
+            "context": 1048576,
+            "output": 393216
+          }
+        }
+      }
+    }
+  }
+}
